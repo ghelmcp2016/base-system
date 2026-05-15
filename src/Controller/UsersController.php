@@ -104,10 +104,6 @@ class UsersController extends AppController
     public function index()
     {
         $this->viewBuilder()->setLayout('dashboard');
-        $query = $this->Users->find();
-        $users = $this->paginate($query);
-
-        $this->set(compact('users'));
     }
 
     /**

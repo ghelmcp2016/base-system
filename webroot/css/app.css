@@ -413,6 +413,119 @@ textarea {
     overflow-x: auto;
 }
 
+.table-panel {
+    position: relative;
+}
+
+.table-panel.is-busy .table-wrap,
+.table-panel.is-busy .table-footer {
+    opacity: 0.6;
+    transition: opacity 0.18s ease;
+}
+
+.table-loading-overlay {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
+}
+
+.table-loading-indicator {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 14px;
+    border: 1px solid rgba(23, 32, 51, 0.08);
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.92);
+    color: var(--color-text-muted);
+    box-shadow: 0 10px 24px rgba(15, 23, 39, 0.1);
+    backdrop-filter: blur(8px);
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.table-loading-spinner {
+    width: 16px;
+    height: 16px;
+    border: 2px solid rgba(11, 99, 206, 0.2);
+    border-top-color: var(--color-primary);
+    border-radius: 50%;
+    animation: table-spin 0.7s linear infinite;
+}
+
+@keyframes table-spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.vue-content {
+    min-width: 0;
+}
+
+.vue-toolbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 16px;
+}
+
+.vue-search {
+    flex: 1;
+}
+
+.toolbar-actions {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.rows-select {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--color-text-muted);
+    font-size: 14px;
+    white-space: nowrap;
+}
+
+.rows-select select {
+    min-width: 76px;
+    min-height: 44px;
+    padding: 10px 36px 10px 12px;
+    border: 1px solid var(--color-border);
+    border-radius: 12px;
+    background: #fbfcfe;
+    color: var(--color-text);
+}
+
+.rows-select select:focus {
+    outline: none;
+    border-color: rgba(11, 99, 206, 0.7);
+    box-shadow: 0 0 0 4px rgba(11, 99, 206, 0.12);
+}
+
+.vue-search input {
+    width: 100%;
+    min-height: 44px;
+    padding: 12px 14px;
+    border: 1px solid var(--color-border);
+    border-radius: 12px;
+    background: #fbfcfe;
+}
+
+.vue-search input:focus {
+    outline: none;
+    border-color: rgba(11, 99, 206, 0.7);
+    box-shadow: 0 0 0 4px rgba(11, 99, 206, 0.12);
+}
+
 .users-table {
     width: 100%;
     border-collapse: collapse;
@@ -441,6 +554,51 @@ textarea {
     background: rgba(11, 99, 206, 0.03);
 }
 
+.table-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding-top: 18px;
+}
+
+.table-results {
+    margin: 0;
+    color: var(--color-text-muted);
+    font-size: 14px;
+}
+
+.pagination-controls {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.pagination-page {
+    color: var(--color-text-muted);
+    font-size: 14px;
+}
+
+.pagination-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 42px;
+    height: 42px;
+    border: 1px solid #dce3ee;
+    border-radius: 12px;
+    background: #eef2f8;
+    color: #344054;
+    font-size: 20px;
+    line-height: 1;
+    cursor: pointer;
+}
+
+.pagination-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
 .user-cell {
     display: flex;
     align-items: center;
@@ -466,6 +624,16 @@ textarea {
     color: var(--color-success);
     font-size: 12px;
     font-weight: 700;
+}
+
+.status-pill-inactive {
+    background: #eef2f8;
+    color: #475467;
+}
+
+.status-pill-suspended {
+    background: #fff3e8;
+    color: #b54708;
 }
 
 .actions-row {
@@ -591,6 +759,114 @@ textarea {
     color: var(--color-text-muted);
 }
 
+.modal-backdrop {
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    background: rgba(15, 23, 42, 0.58);
+    backdrop-filter: blur(6px);
+}
+
+.modal-card {
+    width: min(100%, 620px);
+    max-height: calc(100vh - 48px);
+    overflow-y: auto;
+    padding: 28px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 24px;
+    background: #18212f;
+    box-shadow: 0 28px 60px rgba(15, 23, 42, 0.4);
+    color: #f8fafc;
+}
+
+.modal-card-sm {
+    width: min(100%, 460px);
+}
+
+.modal-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 16px;
+    margin-bottom: 24px;
+}
+
+.modal-title {
+    margin: 0;
+    font-size: 24px;
+    line-height: 1.2;
+    color: #ffffff;
+}
+
+.modal-copy,
+.modal-text {
+    margin: 8px 0 0;
+    color: rgba(226, 232, 240, 0.82);
+}
+
+.modal-close {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border: 0;
+    border-radius: 999px;
+    background: rgba(148, 163, 184, 0.14);
+    color: rgba(248, 250, 252, 0.85);
+    font-size: 28px;
+    line-height: 1;
+    cursor: pointer;
+}
+
+.modal-close:hover {
+    background: rgba(148, 163, 184, 0.24);
+}
+
+.modal-card .form-field input,
+.modal-card .form-field select,
+.modal-card .form-field textarea {
+    background: rgba(255, 255, 255, 0.06);
+    border-color: rgba(148, 163, 184, 0.26);
+    color: #f8fafc;
+}
+
+.modal-card .form-field input::placeholder,
+.modal-card .form-field textarea::placeholder {
+    color: rgba(226, 232, 240, 0.46);
+}
+
+.modal-card .form-field label {
+    color: #f8fafc;
+}
+
+.modal-card .form-field input:focus,
+.modal-card .form-field select:focus,
+.modal-card .form-field textarea:focus {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(96, 165, 250, 0.72);
+    box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.2);
+}
+
+.modal-card .form-field select option {
+    color: #0f172a;
+}
+
+.modal-body {
+    margin-bottom: 24px;
+}
+
+.modal-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+    margin-top: 28px;
+}
+
 @media (max-width: 960px) {
     .dashboard-layout {
         flex-direction: column;
@@ -602,6 +878,11 @@ textarea {
 }
 
 @media (max-width: 720px) {
+    .vue-toolbar {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
     .auth-card,
     .dashboard-header-card,
     .card-body {
@@ -626,13 +907,46 @@ textarea {
     }
 
     .actions-row,
-    .form-actions {
+    .form-actions,
+    .modal-actions {
         flex-direction: column;
+    }
+
+    .toolbar-actions,
+    .table-footer,
+    .pagination-controls {
+        flex-direction: column;
+        align-items: stretch;
     }
 
     .btn,
     .form-actions .postlink a,
     .form-actions .postlink button {
         width: 100%;
+    }
+
+    .pagination-btn {
+        width: 100%;
+    }
+
+    .modal-backdrop {
+        padding: 16px;
+        align-items: flex-end;
+    }
+
+    .modal-card {
+        width: 100%;
+        max-height: 88vh;
+        padding: 22px;
+        border-radius: 24px 24px 16px 16px;
+    }
+
+    .modal-header {
+        margin-bottom: 20px;
+    }
+
+    .modal-close {
+        width: 36px;
+        height: 36px;
     }
 }

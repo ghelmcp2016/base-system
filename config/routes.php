@@ -49,6 +49,18 @@ return function (RouteBuilder $routes): void {
      */
     $routes->setRouteClass(DashedRoute::class);
 
+    $routes->scope('/api', ['prefix' => 'API'], function (RouteBuilder $builder): void {
+        $builder->connect('/users', ['controller' => 'Users', 'action' => 'index']);
+        $builder->connect('/users/:id', ['controller' => 'Users', 'action' => 'view'])
+            ->setPass(['id']);
+        $builder->connect('/users/add', ['controller' => 'Users', 'action' => 'add']);
+        $builder->connect('/users/:id/edit', ['controller' => 'Users', 'action' => 'edit'])
+            ->setPass(['id']);
+        $builder->connect('/users/:id/delete', ['controller' => 'Users', 'action' => 'delete'])
+            ->setPass(['id']);
+        $builder->fallbacks(DashedRoute::class);
+    });
+
     $routes->scope('/', function (RouteBuilder $builder): void {
         /*
          * Redirect home page to login or dashboard

@@ -25,7 +25,7 @@ use Cake\Event\EventManagerInterface;
 use Cake\Http\BaseApplication;
 use App\Middleware\SessionAttributeMiddleware;
 use Cake\Http\Middleware\BodyParserMiddleware;
-use Cake\Http\Middleware\CsrfProtectionMiddleware;
+use App\Middleware\ConditionalCsrfMiddleware;
 use Cake\Http\MiddlewareQueue;
 use Cake\ORM\Locator\TableLocator;
 use Cake\Routing\Middleware\AssetMiddleware;
@@ -93,16 +93,14 @@ class Application extends BaseApplication implements AuthenticationServiceProvid
             // Body Parser
             ->add(new BodyParserMiddleware())
 
-            // Session attribute for authentication persistence
+            // Session handling
             ->add(new SessionAttributeMiddleware())
 
             // Authentication
             ->add(new AuthenticationMiddleware($this))
 
             // CSRF
-            ->add(new CsrfProtectionMiddleware([
-                'httponly' => true,
-            ]));
+            ->add(new ConditionalCsrfMiddleware());
 
         return $middlewareQueue;
     }
